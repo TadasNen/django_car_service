@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block header %}Order Detail{% endblock %}
+
+{% block content %}
+    <h2>Order Information</h2>
+    <ul>
+        <li><strong>Date:</strong> {{ order.date }}</li>
+        <li><strong>Car:</strong> <a href="{% url 'car_detail' pk=order.car.id %}">{{ order.car.car_model.brand }} {{ order.car.car_model.model }}</a></li>
+        <li><strong>Total Price:</strong> {{ order.order_total_price|floatformat:2 }} EUR</li>
+    </ul>
+
+    <h2>Services</h2>
+    <ul>
+        {% for order_row in order_rows %}
+            <li>
+                {{ order_row.service_name }} |
+                <strong>Amount:</strong> {{ order_row.amount }} |
+                <strong>Total Price:</strong> {{ order_row.total_price|floatformat:2 }} EUR
+            </li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="{% url 'orders' %}">Back to Orders</a></p>
+{% endblock %}

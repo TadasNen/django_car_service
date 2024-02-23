@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}Search Results{% endblock %}
+
+{% block content %}
+
+<h2>Search Results for '{{ query_text }}'</h2>
+
+{% if car_results %}
+<ul>
+    {% for car in car_results %}
+    <li>
+        <a href="{% url 'car_detail' car.id %}">
+            {{ car.client }} - {{ car.car_model.brand }} {{ car.car_model.model }} ({{ car.license_plate }})
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>We didn't find anything... Please try again</p>
+{% endif %}
+{% endblock %}

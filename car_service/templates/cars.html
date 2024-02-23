@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}Cars{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        {% for car in cars %}
+            <div class="col-sm-6 col-md-4 d-flex align-items-stretch">
+                <div class="card mb-4 shadow-sm">
+                    {% if car.image %}
+                    <img src="{{ car.image.url }}" class="card-img-top"/>
+                    {% else %}
+                    <img src="{% static 'img/no-image.png' %}" class="card-img-top"/>
+                    {% endif %}
+                    <div class="card-body">
+                        <p class="card-text"><a href="{% url 'car_detail' car.id %}">{{ car.car_model.brand }}
+                            {{ car.car_model.model }} {{ car.license_plate }}</a></p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if cars.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ cars.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ cars.number }} of {{ cars.paginator.num_pages }}.
+            </span>
+
+            {% if cars.has_next %}
+                <a href="?page={{ cars.next_page_number }}">next</a>
+                <a href="?page={{ cars.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

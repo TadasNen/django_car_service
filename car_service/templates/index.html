@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Home page</h1>
+
+<h2>Statistics</h2>
+<p>Total Cars: {{ total_cars }}</p>
+<p>Total Orders: {{ total_orders }}</p>
+<p>Total Services: {{ total_services }}</p>
+<p>{{ user }} visit count: {{ visit_count }}</p>
+
+{% endblock %}

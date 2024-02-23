@@ -1,0 +1,21 @@
+body {
+    background-color: #faf2e1;
+}
+
+.card {
+    min-height: 200px;
+    width: auto;
+}
+
+.card-body{
+    height: 25%;
+}
+
+.card img{
+    height: 75%;
+    object-fit: contain;
+}
+
+.navbar-nav li {
+    white-space: nowrap;
+}

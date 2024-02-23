@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}Orders{% endblock %}
+
+{% block content %}
+<h1>My orders:</h1>
+{% if orders %}
+    <ul>
+        {% for order in orders %}
+            <li class="{% if order.is_overdue %}text-danger{% else %}text-success{% endif %}">
+                <a href="{% url 'order_detail' order.id %}">
+                {{ order.car.car_model.brand }} {{ order.car.car_model.model }}
+                </a>
+                {% if order.date %}
+                    {{ order.date }}
+                {% else %}
+                    No set date
+                {% endif %}
+                <p class="{% if order.status == 'p' %} text-danger
+                          {% elif order.status == 't' %} text-muted
+                          {% elif order.status == 'c' %} text-success
+                          {% else %} text-warning
+                          {% endif %} "><strong>{{ order.get_status_display }}</strong></p>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No current orders</p>
+{% endif %}
+{% endblock %}
